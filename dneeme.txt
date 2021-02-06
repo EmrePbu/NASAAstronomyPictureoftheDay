@@ -1,0 +1,104 @@
+import 'package:NASAAstronomyPictureoftheDay/views/home/home_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:rive/rive.dart';
+
+class LoadingView extends StatefulWidget {
+  @override
+  _LoadingViewState createState() => _LoadingViewState();
+}
+
+class _LoadingViewState extends State<LoadingView> {
+  Artboard _riveArtboard;
+  RiveAnimationController _controller;
+
+  void isPlaying() {
+    _controller.isActiveChanged.addListener(() {
+      if (_controller.isActive) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    riveLoading();
+  }
+
+  void riveLoading() {
+    rootBundle.load('assets/rive/space_load.riv').then(
+      (data) async {
+        final file = RiveFile();
+
+        if (file.import(data)) {
+          final artboard = file.mainArtboard;
+
+          artboard.addController(_controller = SimpleAnimation('Pull'));
+          setState(() => _riveArtboard = artboard);
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _loadingSplash();
+  }
+
+  Widget _loadingSplash() {
+    return _riveArtboard == null
+        ? const SizedBox()
+        : Rive(
+            artboard: _riveArtboard,
+            fit: BoxFit.contain,
+          );
+  }
+}
+
+
+
+
+Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.arrow_drop_down_circle),
+                          title: const Text('Card title 1'),
+                          subtitle: Text(
+                            'Secondary Text',
+                            style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            'Greyhound divisively hello coldly wonderfully marginally far upon excluding.',
+                            style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                          ),
+                        ),
+                        ButtonBar(
+                          alignment: MainAxisAlignment.start,
+                          children: [
+                            FlatButton(
+                              textColor: const Color(0xFF6200EE),
+                              onPressed: () {
+                                // Perform some action
+                              },
+                              child: const Text('ACTION 1'),
+                            ),
+                            FlatButton(
+                              textColor: const Color(0xFF6200EE),
+                              onPressed: () {
+                                // Perform some action
+                              },
+                              child: const Text('ACTION 2'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
