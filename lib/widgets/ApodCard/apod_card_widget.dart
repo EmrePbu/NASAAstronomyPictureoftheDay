@@ -10,6 +10,8 @@ class ApodCard extends StatelessWidget {
     this.title,
     this.date,
     this.explanation,
+    this.videoUrl,
+    this.mediaType,
   }) : super(key: key);
 
   final Widget copyright;
@@ -18,6 +20,8 @@ class ApodCard extends StatelessWidget {
   final Widget title;
   final Widget date;
   final Widget explanation;
+  final String videoUrl;
+  final String mediaType;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +41,8 @@ class ApodCard extends StatelessWidget {
                     builder: (_) {
                       return DetailsView(
                         image: detailImage,
+                        videoUrl: videoUrl,
+                        mediaType: mediaType,
                       );
                     },
                   ),

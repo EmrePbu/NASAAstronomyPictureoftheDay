@@ -7,6 +7,7 @@ class Apod {
   String serviceVersion;
   String title;
   String url;
+  String thumbnailUrl;
 
   Apod({
     this.copyright,
@@ -17,6 +18,7 @@ class Apod {
     this.serviceVersion,
     this.title,
     this.url,
+    this.thumbnailUrl,
   });
 
   Apod.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,7 @@ class Apod {
     serviceVersion = json['service_version'];
     title = json['title'];
     url = json['url'];
+    thumbnailUrl = json['thumbnail_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -40,6 +43,7 @@ class Apod {
     data['service_version'] = this.serviceVersion;
     data['title'] = this.title;
     data['url'] = this.url;
+    data['thumbnail_url'] = this.thumbnailUrl;
     return data;
   }
 }

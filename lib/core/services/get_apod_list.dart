@@ -15,7 +15,7 @@ final String daysBefore = formatter.format(DateTime.now().subtract(Duration(days
 final String currentDay = formatter.format(DateTime.now());
 
 Future<List<Apod>> fetchApod(http.Client client) async {
-  final response = await client.get('$apiUrl&start_date=$daysBefore&end_date=$currentDay');
+  final response = await client.get('$apiUrl&start_date=$daysBefore&end_date=$currentDay&thumbs=true');
   return compute(parseApod, response.body);
 }
 

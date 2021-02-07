@@ -45,13 +45,16 @@ class ApodList extends StatelessWidget {
       reverse: true,
       itemCount: apods.length,
       itemBuilder: (context, index) {
+        // TODO: bu kısımda mediatype ları kontrol ederek kontrol deyimleri oluştur.
         return ApodCard(
           copyright: Text(apods[index].copyright == null ? 'no copyright' : apods[index].copyright),
           date: Text(apods[index].date == null ? 'no date' : apods[index].date),
           explanation: Text(apods[index].explanation == null ? 'no explanation' : apods[index].explanation),
           title: Text(apods[index].title == null ? 'no title' : apods[index].title),
           detailImage: apods[index].hdurl == null ? 'https://via.placeholder.com/600/92c952' : apods[index].hdurl,
-          thumbsImage: Image.network(apods[index].hdurl == null ? 'https://via.placeholder.com/600/92c952' : apods[index].hdurl),
+          thumbsImage: Image.network(apods[index].mediaType == 'image' ? apods[index].hdurl : apods[index].thumbnailUrl),
+          mediaType: apods[index].mediaType,
+          videoUrl: apods[index].mediaType == 'video' ? apods[index].url : null,
         );
       },
     );
