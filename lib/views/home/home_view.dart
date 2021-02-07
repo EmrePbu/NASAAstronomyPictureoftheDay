@@ -42,7 +42,8 @@ class ApodList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      reverse: true,
+      scrollDirection: Axis.vertical,
+      reverse: false,
       itemCount: apods.length,
       itemBuilder: (context, index) {
         // TODO: bu kısımda mediatype ları kontrol ederek kontrol deyimleri oluştur.
