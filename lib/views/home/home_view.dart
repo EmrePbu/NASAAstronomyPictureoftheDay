@@ -1,5 +1,5 @@
 import 'package:NASAAstronomyPictureoftheDay/core/models/apod.dart';
-import 'package:NASAAstronomyPictureoftheDay/themes/utils/font.dart';
+import 'package:NASAAstronomyPictureoftheDay/themes/utils/utils.dart';
 import 'package:NASAAstronomyPictureoftheDay/widgets/ApodCard/apod_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -10,48 +10,123 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   Future<Apod> futureApod;
+  IconData _favIcon;
+  bool isLiked;
 
 //getApodImage(futureApod),
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          margin: EdgeInsets.all(20.0),
-          child: SizedBox(
-            child: Stack(
-              children: [
-                Container(
-                  child: Placeholder(),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              newMethod(),
+              newMethod(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container newMethod() {
+    return Container(
+      margin: EdgeInsets.all(20.0),
+      width: MediaQuery.of(context).size.width * .8,
+      height: MediaQuery.of(context).size.height,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Stack(
+          children: [
+            Container(
+              child: Placeholder(),
+            ),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              alignment: Alignment.bottomCenter,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: <Color>[Colors.black.withAlpha(0), Colors.black12, Colors.black45],
                 ),
-                Container(
-                  padding: EdgeInsets.all(5.0),
-                  alignment: Alignment.bottomCenter,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: <Color>[Colors.black.withAlpha(0), Colors.black12, Colors.black45],
-                    ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Title",
+                    style: headline3,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                  Text(
+                    "Each box represents datasets with a specific combination of source, category, and keyword. Boxes are scaled by number of datasets. Only keyword is written on the box.",
+                    style: bodyText4,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        "Title",
-                        style: headline2,
+                      IconButton(
+                        // TODO: Bu kısımda telefon dilini alarak content i ingilizceden telefon diline çevirmen gerek
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.translate,
+                          color: Colors.blue,
+                          size: iconSize2,
+                          semanticLabel: 'translate to text',
+                        ),
                       ),
-                      Text(
-                        "Each box represents datasets with a specific combination of source, category, and keyword. Boxes are scaled by number of datasets. Only keyword is written on the box.",
-                        style: bodyText1,
+                      Spacer(),
+                      Text('Coprigyht'),
+                      Spacer(),
+                      Text('Media Type'),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            if (isLiked == true) {
+                              _favIcon = Icons.favorite_border;
+                              isLiked = false;
+                            } else {
+                              _favIcon = Icons.favorite;
+                              isLiked = true;
+                            }
+                            print(isLiked);
+                          });
+                        },
+                        icon: Icon(
+                          _favIcon,
+                          color: Colors.pink[800],
+                          size: iconSize2,
+                          semanticLabel: 'add to favorite',
+                        ),
                       ),
-                      Row()
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.file_download,
+                          color: Colors.green,
+                          size: iconSize2,
+                          semanticLabel: 'download to device',
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.share,
+                          color: Colors.blue,
+                          size: iconSize2,
+                          semanticLabel: 'share',
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
