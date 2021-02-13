@@ -1,4 +1,3 @@
-import 'package:NASAAstronomyPictureoftheDay/views/home/home_view.dart';
 import 'package:NASAAstronomyPictureoftheDay/views/loading/loading_view.dart';
 import 'package:flutter/material.dart';
 
@@ -13,3 +12,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// TODO: Bu kısımda yada loading kısmında dataları yükleme işlemini gerçekleştir. ve json olarak kaydet

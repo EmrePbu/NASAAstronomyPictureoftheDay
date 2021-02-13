@@ -1,8 +1,7 @@
 import 'package:NASAAstronomyPictureoftheDay/core/models/apod.dart';
-import 'package:NASAAstronomyPictureoftheDay/core/services/get_apod_list.dart';
+import 'package:NASAAstronomyPictureoftheDay/themes/utils/font.dart';
 import 'package:NASAAstronomyPictureoftheDay/widgets/ApodCard/apod_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class HomeView extends StatefulWidget {
   @override
@@ -16,10 +15,51 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('NASA - Apod'),
+      body: SafeArea(
+        child: Container(
+          margin: EdgeInsets.all(20.0),
+          child: SizedBox(
+            child: Stack(
+              children: [
+                Container(
+                  child: Placeholder(),
+                ),
+                Container(
+                  padding: EdgeInsets.all(5.0),
+                  alignment: Alignment.bottomCenter,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: <Color>[Colors.black.withAlpha(0), Colors.black12, Colors.black45],
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Title",
+                        style: headline2,
+                      ),
+                      Text(
+                        "Each box represents datasets with a specific combination of source, category, and keyword. Boxes are scaled by number of datasets. Only keyword is written on the box.",
+                        style: bodyText1,
+                      ),
+                      Row()
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
-      body: FutureBuilder(
+    );
+  }
+}
+
+/*
+FutureBuilder(
         future: fetchApod(http.Client()),
         builder: (context, snapshot) {
           if (snapshot.hasError) print(snapshot.error);
@@ -29,13 +69,7 @@ class _HomeViewState extends State<HomeView> {
                 )
               : Center(child: CircularProgressIndicator());
         },
-      ),
-    );
-  }
-}
-
-/*
- */
+      ) */
 class ApodList extends StatelessWidget {
   final List<Apod> apods;
 
