@@ -1,7 +1,7 @@
 import 'package:NASAAstronomyPictureoftheDay/views/details/details_view.dart';
 import 'package:flutter/material.dart';
 
-class ApodCard extends StatelessWidget {
+class ApodCard extends StatefulWidget {
   const ApodCard({
     Key key,
     this.copyright,
@@ -24,6 +24,14 @@ class ApodCard extends StatelessWidget {
   final String mediaType;
 
   @override
+  _ApodCardState createState() => _ApodCardState();
+}
+
+class _ApodCardState extends State<ApodCard> {
+  IconData _favIcon;
+  bool isLiked;
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(10.0),
@@ -33,16 +41,16 @@ class ApodCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             GestureDetector(
-              child: thumbsImage,
+              child: widget.thumbsImage,
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) {
                       return DetailsView(
-                        image: detailImage,
-                        videoUrl: videoUrl,
-                        mediaType: mediaType,
+                        image: widget.detailImage,
+                        videoUrl: widget.videoUrl,
+                        mediaType: widget.mediaType,
                       );
                     },
                   ),
@@ -51,9 +59,9 @@ class ApodCard extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(Icons.calendar_today),
-              title: title,
+              title: widget.title,
               subtitle: Row(
-                children: [Text('Copyright '), copyright],
+                children: [Text('Copyright '), widget.copyright],
               ),
             ),
             Row(
@@ -71,10 +79,21 @@ class ApodCard extends StatelessWidget {
                 ),
                 Spacer(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      if (isLiked == true) {
+                        _favIcon = Icons.favorite_border;
+                        isLiked = false;
+                      } else {
+                        _favIcon = Icons.favorite;
+                        isLiked = true;
+                      }
+                      print(isLiked);
+                    });
+                  },
                   icon: Icon(
-                    Icons.favorite,
-                    color: Colors.pink,
+                    _favIcon,
+                    color: Colors.black,
                     size: 30.0,
                     semanticLabel: 'add to favorite',
                   ),
@@ -102,7 +121,7 @@ class ApodCard extends StatelessWidget {
             Container(
               margin: EdgeInsets.symmetric(horizontal: 10.0),
               alignment: Alignment.centerLeft,
-              child: date,
+              child: widget.date,
             ),
             Divider(
               thickness: 1.0,
@@ -111,7 +130,7 @@ class ApodCard extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 10.0),
-              child: explanation,
+              child: widget.explanation,
             ),
           ],
         ),
