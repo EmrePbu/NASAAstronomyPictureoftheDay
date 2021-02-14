@@ -17,14 +17,14 @@ class _HomeViewState extends State<HomeView> {
 
   Color containerColor;
   List<Color> containerColors = [
-    const Color(0xFFFDE1D7),
-    const Color(0xFFE4EDF5),
-    const Color(0xFFE7EEED),
-    const Color(0xFFE7EEED),
-    const Color(0xFFF4E4CE),
-    const Color(0xFFF4E4CE),
-    const Color(0xFFF4E4CE),
-    const Color(0xFFF4E4CE),
+    const Color(0xFF43B7CA),
+    const Color(0xFF74512A),
+    const Color(0xFF54F5A7),
+    const Color(0xFF6ED121),
+    const Color(0xFF51DE5A),
+    const Color(0xFFF21751),
+    const Color(0xFFE0624D),
+    const Color(0xFF60C64C),
   ];
 
 //getApodImage(futureApod),
@@ -38,12 +38,14 @@ class _HomeViewState extends State<HomeView> {
           duration: Duration(seconds: 1),
           child: PageView(
             onPageChanged: _onPageChanged,
-            children: [],
+            children: [
+              //TODO : bu kısımda apod cardları göster
+            ],
           ),
         ),
       ),
       bottomNavigationBar: SnakeNavigationBar.color(
-        height: 30,
+        height: 40,
         behaviour: SnakeBarBehaviour.floating,
         snakeShape: SnakeShape.circle,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(25))),
