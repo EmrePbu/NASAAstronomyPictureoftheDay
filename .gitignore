@@ -1,7 +1,7 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
 
-# Created by https://www.toptal.com/developers/gitignore/api/dart,darteditor,flutter,vscode,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=dart,darteditor,flutter,vscode,windows
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,dart,flutter
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,dart,flutter
 
 ### Dart ###
 # See https://www.dartlang.org/guides/libraries/private-files
@@ -25,10 +25,6 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
-
-### DartEditor ###
-.project
-.buildlog
 
 ### Flutter ###
 # Flutter/Dart/Pub related
@@ -91,13 +87,16 @@ lib/generated_plugin_registrant.dart
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-### vscode ###
+### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
-!.vscode/extensions.json
 *.code-workspace
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -125,8 +124,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/dart,darteditor,flutter,vscode,windows
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,dart,flutter
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
-*.txt
+trash/
