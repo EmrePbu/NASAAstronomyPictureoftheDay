@@ -1,7 +1,9 @@
 import 'package:NASAAstronomyPictureoftheDay/core/models/apod.dart';
-import 'package:NASAAstronomyPictureoftheDay/themes/utils/utils.dart';
 import 'package:NASAAstronomyPictureoftheDay/widgets/ApodCard/apod_card_widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -10,126 +12,100 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   Future<Apod> futureApod;
-  IconData _favIcon;
-  bool isLiked;
+
+  int _selectedItemPosition = 0;
+
+  Color containerColor;
+  List<Color> containerColors = [
+    const Color(0xFFFDE1D7),
+    const Color(0xFFE4EDF5),
+    const Color(0xFFE7EEED),
+    const Color(0xFFE7EEED),
+    const Color(0xFFF4E4CE),
+    const Color(0xFFF4E4CE),
+    const Color(0xFFF4E4CE),
+    const Color(0xFFF4E4CE),
+  ];
 
 //getApodImage(futureApod),
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF48388D),
       body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              newMethod(),
-              newMethod(),
-            ],
+        child: AnimatedContainer(
+          color: containerColor ?? containerColors[0],
+          duration: Duration(seconds: 1),
+          child: PageView(
+            onPageChanged: _onPageChanged,
+            children: [],
           ),
         ),
+      ),
+      bottomNavigationBar: SnakeNavigationBar.color(
+        height: 30,
+        behaviour: SnakeBarBehaviour.floating,
+        snakeShape: SnakeShape.circle,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(25))),
+        padding: EdgeInsets.all(12),
+        snakeViewColor: Color(0xFF48388D),
+        showUnselectedLabels: false,
+        showSelectedLabels: false,
+        currentIndex: _selectedItemPosition,
+        onTap: (index) => setState(() => _selectedItemPosition = index),
+        items: [
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icons8_sphere.svg', color: Colors.white)),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icons8_sphere.svg', color: Colors.white)),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icons8_sphere.svg', color: Colors.white)),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icons8_sphere.svg', color: Colors.white)),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icons8_sphere.svg', color: Colors.white)),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icons8_sphere.svg', color: Colors.white)),
+          BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/icons8_sphere.svg', color: Colors.white)),
+        ],
       ),
     );
   }
 
-  Container newMethod() {
-    return Container(
-      margin: EdgeInsets.all(20.0),
-      width: MediaQuery.of(context).size.width * .8,
-      height: MediaQuery.of(context).size.height,
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Stack(
-          children: [
-            Container(
-              child: Placeholder(),
-            ),
-            Container(
-              padding: EdgeInsets.all(5.0),
-              alignment: Alignment.bottomCenter,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: <Color>[Colors.black.withAlpha(0), Colors.black12, Colors.black45],
-                ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    "Title",
-                    style: headline3,
-                  ),
-                  Text(
-                    "Each box represents datasets with a specific combination of source, category, and keyword. Boxes are scaled by number of datasets. Only keyword is written on the box.",
-                    style: bodyText4,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        // TODO: Bu kısımda telefon dilini alarak content i ingilizceden telefon diline çevirmen gerek
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.translate,
-                          color: Colors.blue,
-                          size: iconSize2,
-                          semanticLabel: 'translate to text',
-                        ),
-                      ),
-                      Spacer(),
-                      Text('Coprigyht'),
-                      Spacer(),
-                      Text('Media Type'),
-                      Spacer(),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            if (isLiked == true) {
-                              _favIcon = Icons.favorite_border;
-                              isLiked = false;
-                            } else {
-                              _favIcon = Icons.favorite;
-                              isLiked = true;
-                            }
-                            print(isLiked);
-                          });
-                        },
-                        icon: Icon(
-                          _favIcon,
-                          color: Colors.pink[800],
-                          size: iconSize2,
-                          semanticLabel: 'add to favorite',
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.file_download,
-                          color: Colors.green,
-                          size: iconSize2,
-                          semanticLabel: 'download to device',
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.share,
-                          color: Colors.blue,
-                          size: iconSize2,
-                          semanticLabel: 'share',
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  void _onPageChanged(int page) {
+    containerColor = containerColors[page];
+    switch (page) {
+      case 0:
+        setState(() {
+          _selectedItemPosition = 0;
+        });
+        break;
+      case 1:
+        setState(() {
+          _selectedItemPosition = 1;
+        });
+        break;
+
+      case 2:
+        setState(() {
+          _selectedItemPosition = 2;
+        });
+        break;
+      case 3:
+        setState(() {
+          _selectedItemPosition = 3;
+        });
+        break;
+      case 4:
+        setState(() {
+          _selectedItemPosition = 4;
+        });
+        break;
+      case 5:
+        setState(() {
+          _selectedItemPosition = 5;
+        });
+        break;
+      case 6:
+        setState(() {
+          _selectedItemPosition = 6;
+        });
+        break;
+    }
   }
 }
 
@@ -168,37 +144,6 @@ class ApodList extends StatelessWidget {
         thumbsImage: Image.network(apods[index].mediaType == 'image' ? apods[index].hdurl : apods[index].thumbnailUrl),
         mediaType: apods[index].mediaType,
         videoUrl: apods[index].mediaType == 'video' ? apods[index].url : null,
-      ),
-    );
-  }
-
-  SizedBox newMethod() {
-    return SizedBox(
-      width: 250,
-      height: 250,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            width: 250,
-            height: 250,
-            child: Image.network('https://via.placeholder.com/600/92c952'),
-          ),
-          Container(
-            padding: EdgeInsets.all(5.0),
-            alignment: Alignment.bottomCenter,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[Colors.black.withAlpha(0), Colors.black12, Colors.black45],
-              ),
-            ),
-            child: Text(
-              "Foreground Text",
-              style: TextStyle(color: Colors.white, fontSize: 20.0),
-            ),
-          ),
-        ],
       ),
     );
   }
