@@ -28,7 +28,7 @@ class ApodCard extends StatefulWidget {
 }
 
 class _ApodCardState extends State<ApodCard> {
-  IconData _favIcon;
+  IconData _favIcon = Icons.favorite_border;
   bool isLiked;
 
   @override
@@ -83,7 +83,7 @@ class _ApodCardState extends State<ApodCard> {
                       icon: Icon(
                         Icons.translate,
                         color: Colors.blue,
-                        size: 30.0,
+                        size: 19,
                         semanticLabel: 'translate to text',
                       ),
                     ),
@@ -106,7 +106,7 @@ class _ApodCardState extends State<ApodCard> {
                       icon: Icon(
                         _favIcon,
                         color: Colors.black,
-                        size: 30.0,
+                        size: 19,
                         semanticLabel: 'add to favorite',
                       ),
                     ),
@@ -117,7 +117,7 @@ class _ApodCardState extends State<ApodCard> {
                       icon: Icon(
                         Icons.file_download,
                         color: Colors.green,
-                        size: 30.0,
+                        size: 19,
                         semanticLabel: 'download to device',
                       ),
                     ),
@@ -128,7 +128,7 @@ class _ApodCardState extends State<ApodCard> {
                       icon: Icon(
                         Icons.share,
                         color: Colors.blue,
-                        size: 30.0,
+                        size: 19,
                         semanticLabel: 'share',
                       ),
                     ),

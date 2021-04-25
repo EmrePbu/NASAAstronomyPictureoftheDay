@@ -45,7 +45,7 @@ class _LoadingViewState extends State<LoadingView> {
           Container(
             padding: EdgeInsets.all(5.0),
             alignment: Alignment.bottomCenter,
-            child: FlatButton(
+            child: MaterialButton(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -54,7 +54,7 @@ class _LoadingViewState extends State<LoadingView> {
                     color: Colors.white54,
                   ),
                   Text(
-                    'Ana Sayfa',
+                    'Next',
                     style: TextStyle(fontSize: 20.0, color: Colors.white54),
                   ),
                 ],

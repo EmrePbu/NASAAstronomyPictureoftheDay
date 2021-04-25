@@ -4,7 +4,7 @@ import 'package:NASAAstronomyPictureoftheDay/widgets/ApodCard/apod_card_widget.d
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 
 class HomeView extends StatefulWidget {
@@ -28,59 +28,63 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: Color(0xFF48388D),
       body: SafeArea(
-        child: AnimatedContainer(
-            duration: Duration(seconds: 1),
-            child: FutureBuilder(
-              future: fetchApod(http.Client()),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) print(snapshot.error);
-                if (snapshot.hasData) {
-                  return PageView.builder(
-                      reverse: true,
-                      controller: PageController(initialPage: 6),
-                      onPageChanged: _onPageChanged,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) {
-                        return ApodCard(
-                          copyright: Text(snapshot.data[index].copyright == null ? 'no copyright' : snapshot.data[index].copyright),
-                          date: Text(snapshot.data[index].date == null ? 'no date' : snapshot.data[index].date),
-                          explanation: Text(snapshot.data[index].explanation == null ? 'no explanation' : snapshot.data[index].explanation),
-                          title: Text(snapshot.data[index].title == null ? 'no title' : snapshot.data[index].title),
-                          detailImage: snapshot.data[index].hdurl == null ? 'https://via.placeholder.com/600/92c952' : snapshot.data[index].hdurl,
-                          thumbsImage: Image.network(
-                              snapshot.data[index].mediaType == 'image' ? snapshot.data[index].hdurl : snapshot.data[index].thumbnailUrl),
-                          mediaType: snapshot.data[index].mediaType,
-                          videoUrl: snapshot.data[index].mediaType == 'video' ? snapshot.data[index].url : null,
-                        );
-                      });
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              },
-            )),
+        child: FutureBuilder(
+          future: fetchApod(http.Client()),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print('asdas');
+              print(snapshot.error);
+            }
+            if (snapshot.hasData) {
+              return PageView.builder(
+                  reverse: true,
+                  controller: PageController(initialPage: 6),
+                  onPageChanged: _onPageChanged,
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) {
+                    return ApodCard(
+                      copyright: Text(snapshot.data[index].copyright == null ? 'no copyright' : snapshot.data[index].copyright),
+                      date: Text(snapshot.data[index].date == null ? 'no date' : snapshot.data[index].date),
+                      explanation: Text(snapshot.data[index].explanation == null ? 'no explanation' : snapshot.data[index].explanation),
+                      title: Text(snapshot.data[index].title == null ? 'no title' : snapshot.data[index].title),
+                      detailImage: snapshot.data[index].hdurl == null ? 'https://via.placeholder.com/600/92c952' : snapshot.data[index].hdurl,
+                      thumbsImage:
+                          Image.network(snapshot.data[index].mediaType == 'image' ? snapshot.data[index].hdurl : snapshot.data[index].thumbnailUrl),
+                      mediaType: snapshot.data[index].mediaType,
+                      videoUrl: snapshot.data[index].mediaType == 'video' ? snapshot.data[index].url : null,
+                    );
+                  });
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _selectedItemPosition,
         onTap: _handleIndexChanged,
         items: [
-          bottomBarItem(),
-          bottomBarItem(),
-          bottomBarItem(),
-          bottomBarItem(),
-          bottomBarItem(),
-          bottomBarItem(),
-          bottomBarItem(),
+          bottomBarItem(_selectedItemPosition),
+          bottomBarItem(_selectedItemPosition),
+          bottomBarItem(_selectedItemPosition),
+          bottomBarItem(_selectedItemPosition),
+          bottomBarItem(_selectedItemPosition),
+          bottomBarItem(_selectedItemPosition),
+          bottomBarItem(_selectedItemPosition),
         ],
       ),
     );
   }
 
-  SalomonBottomBarItem bottomBarItem() {
+  SalomonBottomBarItem bottomBarItem(int pageNumber) {
     return SalomonBottomBarItem(
-      selectedColor: Colors.purple[50],
-      title: Text(''),
-      icon: SvgPicture.asset('assets/icons/icons8_new_moon.svg', color: Colors.white, height: 15),
-    );
+        selectedColor: Colors.purple[50],
+        title: Text("${pageNumber + 1}"),
+        icon: Icon(
+          Icons.circle,
+          size: 20,
+        ) //SvgPicture.asset('assets/icons/icons8_new_moon.svg', color: Colors.white, height: 15),
+        );
   }
 
   void _onPageChanged(int page) {
