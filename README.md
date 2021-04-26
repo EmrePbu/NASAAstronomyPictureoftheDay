@@ -17,4 +17,3 @@ https://api.nasa.gov/ sitesinden aldığım json verisi ile https://apod.nasa.go
 
 <img src="https://github.com/EmrePbu/NASAAstronomyPictureoftheDay/blob/main/flutter_04.png" alt="flutter_04" style="zoom:33%;" />
 
-# BUTONLAR HARİÇ ÇALIŞIYOR
