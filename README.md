@@ -2,6 +2,12 @@
 https://api.nasa.gov/ sitesinden aldığım json verisi ile https://apod.nasa.gov/apod/astropix.html sitesinin mobil versiyonu şeklinde bir şey 
 
 
+## todo
+1. translate
+2. fav button
+3. download button
+4. share button
+
 
 <img src="https://github.com/EmrePbu/NASAAstronomyPictureoftheDay/blob/main/flutter_01.png" alt="flutter_01" style="zoom:33%;" />
 
