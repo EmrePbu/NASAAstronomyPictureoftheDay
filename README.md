@@ -4,8 +4,11 @@ https://api.nasa.gov/ sitesinden aldığım json verisi ile https://apod.nasa.go
 
 ## todo
 ❌ translate
+
 ❌ fav button
+
 ❌ download button
+
 ❌ share button
 
 
